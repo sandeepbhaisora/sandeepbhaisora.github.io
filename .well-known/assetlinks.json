@@ -1,5 +1,5 @@
 [{
   "relation": ["delegate_permission/common.handle_all_urls"],
   "target" : { "namespace": "android_app", "package_name": "com.example.onesignaldemo",
-               "sha256_cert_fingerprints": [" 8B:0C:5A:FB:7E:69:DF:93:20:97:4C:0C:89:A6:7A:D1:C8:8D:47:DB:96:E2:B0:78:45:FC:9F:77:21:CB:8B:1B"] }
+               "sha256_cert_fingerprints": ["8B:0C:5A:FB:7E:69:DF:93:20:97:4C:0C:89:A6:7A:D1:C8:8D:47:DB:96:E2:B0:78:45:FC:9F:77:21:CB:8B:1B"] }
 }]

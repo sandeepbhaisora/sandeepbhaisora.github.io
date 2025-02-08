@@ -1,9 +1,110 @@
-<!doctype html>
-<html>
-  <head>
-    <title>This is the title of the webpage!</title>
-  </head>
-  <body>
-    <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IntelliJ IDEA-like Interface</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/material-darker.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/material.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/clike/clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
+
+</head>
+<body>
+<div class="window">
+  <div class="terminal-popup" id="terminal-popup">
+    <div class="terminal-title-bar">
+      <div class="terminal-title-bar-buttons">
+        <span class="terminal-close-btn"></span>
+        <span class="terminal-minimize-btn"></span>
+        <span class="terminal-maximize-btn"></span>
+      </div>
+      <span class="terminal-title">Terminal</span>
+    </div>
+    <textarea class="terminal-textarea" id="terminal-textarea" readonly></textarea>
+  </div>
+  <div class="title-bar">
+    <div class="title-bar-buttons">
+      <span class="close-btn"></span>
+      <span class="minimize-btn"></span>
+      <span class="maximize-btn"></span>
+    </div>
+    <div class="title-section">
+      <div class="title">
+        <span class="icon">SB</span>
+        <span class="project-name">not-a-frontend-guy</span>
+      </div>
+      <div class="version-control">
+        <i class="fas fa-code-branch"></i>
+        <span>master</span>
+      </div>
+    </div>
+    <button id="run-button" class="run-btn">
+      <i class="fas fa-play"></i>
+    </button>
+    <button id="theme-toggle-button" class="theme-toggle-btn">
+      <i class="fas fa-adjust"></i>
+    </button>
+  </div>
+  <div class="container">
+    <div class="left-sidebar">
+      <ul>
+        <li><i class="fas fa-file-alt"></i></li>
+        <li><i class="fas fa-folder-open"></i></li>
+        <li><i class="fas fa-cog"></i></li>
+      </ul>
+    </div>
+    <div class="project-sidebar">
+      <h3>Projects</h3>
+      <ul>
+        <li>
+          <i class="fas fa-folder"></i> src
+          <ul class="nested">
+            <li>
+              <i class="fas fa-folder"></i> main
+              <ul class="nested">
+                <li><i class="fas fa-file"></i> <span class="file" data-file="files/src/main/About.java">About.java</span></li>
+              </ul>
+              <ul class="nested">
+                <li><i class="fas fa-file"></i> <span class="file" data-file="files/src/main/Contact.java">Contact.java</span></li>
+              </ul>
+              <ul class="nested">
+                <li><i class="fas fa-file"></i> <span class="file" data-file="files/src/main/Resume.java">Resume.java</span></li>
+              </ul>
+            </li>
+            <li>
+              <i class="fas fa-folder"></i> blog
+              <ul class="nested">
+                <li><i class="fas fa-file"></i> <span class="file" data-file="files/src/blog/SampleBlog.java">SampleBlog.java</span></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><i class="fas fa-file"></i> <span class="file" data-file="files/README.md">README.md</span></li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <div class="content-top-bar">
+        <ul id="open-files">
+          <!-- Open files will be dynamically added here -->
+        </ul>
+      </div>
+      <textarea id="file-content">Loading...</textarea>
+    </div>
+  </div>
+  <div class="terminal">
+    <h3>Terminal</h3>
+    <textarea id = "terminal-textarea-bottom" rows="10" cols="100"></textarea>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
 </html>

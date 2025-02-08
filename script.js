@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const editor = CodeMirror.fromTextArea(fileContent, {
         lineNumbers: true,
         mode: "text/x-java", // Default mode, you can change it dynamically
-        theme: "material-darker", // Initial theme
+        theme: "solarized light", // Initial theme
         readOnly: true
 
     });
@@ -96,8 +96,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         // Display the content in the popup terminal
                         terminalPopup.style.display = 'flex';
-                        terminalTextareaPopUp.value = plainText;
-                        terminalTextareaPopUp.scrollTop = terminalTextareaPopUp.scrollHeight;
+                        terminalTextareaPopUp.value = "";
+                        typeEffect(terminalTextareaPopUp, plainText);
                     })
                     .catch(error => {
                         console.error('Error loading output file:', error);
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
     themeToggleButton.addEventListener('click', function () {
         const isDarkTheme = document.body.classList.toggle('dark-theme');
         document.body.classList.toggle('light-theme');
-        const newTheme = isDarkTheme ? 'material-darker' : 'material';
+        const newTheme = isDarkTheme ? 'solarized dark' : 'solarized light';
         editor.setOption('theme', newTheme);
 
     });
@@ -196,6 +196,27 @@ document.addEventListener("DOMContentLoaded", function () {
         fileItem.addEventListener('click', function () {
             openFile(filePath, fileName);
         });
+    }
+
+    function typeEffect(element, text, callback) {
+        let index = 0;
+        let speed = 50;
+        // Typing speed in milliseconds
+        const speedIncrement = 4; // Increment speed by 2 milliseconds each character
+
+
+        function type() {
+            if (index < text.length) {
+                element.value += text.charAt(index);
+                index++;
+                setTimeout(type, speed);
+                speed = Math.max(10, speed - speedIncrement); // Increase speed, with a minimum delay of 10ms
+            } else if (callback) {
+                callback(); // Call the callback function when typing is done
+            }
+        }
+
+        type();
     }
 
     function closeFile(filePath, fileItem) {

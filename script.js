@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const togglers = document.querySelectorAll('.project-sidebar li > i.fa-folder, .project-sidebar li > i.fa-folder-open');
+    const folderTogglers = document.querySelectorAll('.project-sidebar li:has(> i.fa-folder), .project-sidebar li:has(> i.fa-folder-open)');
     const runButton = document.getElementById('run-button');
     const terminalPopup = document.getElementById('terminal-popup');
     const closeTerminalButton = document.querySelector('.terminal-close-btn');
@@ -122,22 +122,29 @@ document.addEventListener("DOMContentLoaded", function () {
         terminalPopup.style.display = 'none';
     });
 
-    togglers.forEach(toggler => {
-        toggler.addEventListener('click', function () {
-            const parentLi = this.parentElement;
-            parentLi.classList.toggle('active');
-            this.classList.toggle('fa-folder');
-            this.classList.toggle('fa-folder-open');
+    folderTogglers.forEach(folder => {
+        folder.addEventListener('click', function(event) {
+            // Prevent the event from bubbling up to parent elements
+            event.stopPropagation();
+            this.classList.toggle('active');
+            const icon = this.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-folder');
+                icon.classList.toggle('fa-folder-open');
+            }
         });
     });
 
     const files = document.querySelectorAll('.file');
 
     files.forEach(file => {
-        file.addEventListener('click', function () {
+        file.addEventListener('click', function(event) {
+            // Prevent the event from bubbling up to parent elements
+            event.stopPropagation();
             const filePath = this.getAttribute('data-file');
-            openFile(filePath, this.textContent);
-
+            if (filePath) {
+                openFile(filePath, this.textContent);
+            }
         });
     });
 
